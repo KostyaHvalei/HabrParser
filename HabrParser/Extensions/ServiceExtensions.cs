@@ -8,13 +8,8 @@ public static class ServiceExtensions
     public static void AddFeedHttpClient(this IServiceCollection services, IConfiguration conf)
     {
         services.AddHttpClient<IFeedService, FeedService>(client =>
-                client.BaseAddress = new Uri(conf.GetSection("HabrFeedURL").Value)
+            client.BaseAddress = new Uri(conf.GetSection("HabrFeedURL").Value)
         );
-    }
-    
-    public static void AddFeedService(this IServiceCollection services)
-    {
-        services.AddTransient<IFeedService, FeedService>();
     }
 
     public static void AddArticlesService(this IServiceCollection services)

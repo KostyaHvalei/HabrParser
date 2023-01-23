@@ -13,7 +13,7 @@ public class FeedService : IFeedService
         _logger = logger;
     }
     
-    public async Task<string> Load(int pageNumber)
+    public async Task<string> LoadPage(int pageNumber)
     {
         var response = await _httpClient.GetAsync($"page{pageNumber}");
         return await response.Content.ReadAsStringAsync();

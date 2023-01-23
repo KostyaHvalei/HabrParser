@@ -14,7 +14,7 @@ public class ArticlesService : IArticlesService
 
     public async Task<List<Article>> ParsePage(int pageNumber)
     {
-        var content = await _feedService.Load(pageNumber);
+        var content = await _feedService.LoadPage(pageNumber);
         return new List<Article>();
     }
 }

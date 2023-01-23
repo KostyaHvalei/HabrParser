@@ -2,5 +2,5 @@
 
 public interface IFeedService
 {
-    public Task<string> Load(int pageNumber);
+    public Task<string> LoadPage(int pageNumber);
 }

@@ -14,7 +14,6 @@ namespace HabrParser.Controllers
     {
         private readonly IArticlesService _articlesService;
         private readonly ILogger _logger;
-        private readonly IConfiguration _conf;
 
         public FeedController(IArticlesService articlesService, ILogger<FeedController> logger)
         {
