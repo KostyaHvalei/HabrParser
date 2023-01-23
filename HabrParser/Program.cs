@@ -1,4 +1,6 @@
+using HabrParser.Contracts;
 using HabrParser.Extensions;
+using HabrParser.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
