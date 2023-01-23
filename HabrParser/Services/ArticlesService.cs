@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using HabrParser.Contracts;
+using HabrParser.Models;
 
 namespace HabrParser.Services;
 
@@ -9,5 +10,11 @@ public class ArticlesService : IArticlesService
     public ArticlesService(IFeedService feedService)
     {
         _feedService = feedService;
+    }
+
+    public async Task<List<Article>> ParsePage(int pageNumber)
+    {
+        var content = await _feedService.Load(pageNumber);
+        return new List<Article>();
     }
 }

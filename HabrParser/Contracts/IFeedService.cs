@@ -1,4 +1,4 @@
-﻿namespace Contracts;
+﻿namespace HabrParser.Contracts;
 
 public interface IFeedService
 {

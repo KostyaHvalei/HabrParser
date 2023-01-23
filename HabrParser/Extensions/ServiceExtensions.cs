@@ -1,4 +1,4 @@
-﻿using Contracts;
+﻿using HabrParser.Contracts;
 using HabrParser.Services;
 
 namespace HabrParser.Extensions;
