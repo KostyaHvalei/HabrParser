@@ -9,7 +9,19 @@ public static class ServiceExtensions
     {
         services.AddHttpClient<IFeedService, FeedService>(client =>
         {
-            client.BaseAddress = new Uri(conf.GetSection("HabrFeedURL").Value);
+            var uriString = conf.GetSection("HabrFeedURL").Value;
+            if (uriString != null)
+                client.BaseAddress = new Uri(uriString);
         });
+    }
+    
+    public static void AddFeedService(this IServiceCollection services)
+    {
+        services.AddTransient<IFeedService, FeedService>();
+    }
+
+    public static void AddArticlesService(this IServiceCollection services)
+    {
+        services.AddSingleton<IArticlesService, ArticlesService>();
     }
 }

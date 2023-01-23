@@ -4,6 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddFeedHttpClient(builder.Configuration);
+builder.Services.AddFeedService();
+builder.Services.AddArticlesService();
+
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
