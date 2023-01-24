@@ -16,21 +16,29 @@ namespace HabrParser.Controllers
         private readonly IArticlesService _articlesService;
         private readonly ILogger _logger;
         private readonly FeedService _feedService;
+        private readonly IArticleRepository _articleRepository;
 
         public FeedController(IArticlesService articlesService,
             ILogger<FeedController> logger,
-            FeedService feedService)
+            FeedService feedService,
+            IArticleRepository articleRepository)
         {
             _articlesService = articlesService;
             _logger = logger;
             _feedService = feedService;
+            _articleRepository = articleRepository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllArticles()
         {
-            var content = await _feedService.LoadPage(1);
-            var articles = await _articlesService.ParseRSSPage(content);
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LoadNewArticles()
+        {
+            
             return Ok();
         }
     }
