@@ -1,5 +1,6 @@
 ﻿using HabrParser.Contracts;
 using HabrParser.Data;
+using HabrParser.Repository;
 using HabrParser.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,5 +25,10 @@ public static class ServiceExtensions
     public static void AddArticlesService(this IServiceCollection services)
     {
         services.AddSingleton<IArticlesService, ArticlesService>();
+    }
+
+    public static void AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IArticleRepository, ArticleRepository>();
     }
 }
