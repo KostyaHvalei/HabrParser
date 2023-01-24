@@ -1,4 +1,5 @@
 using HabrParser.Contracts;
+using HabrParser.Data;
 using HabrParser.Extensions;
 using HabrParser.Services;
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddFeedHttpClient(builder.Configuration);
 builder.Services.AddArticlesService();
+
+builder.Services.ConfigureApplicationContext(builder.Configuration);
 
 builder.Services.AddControllers();
 
