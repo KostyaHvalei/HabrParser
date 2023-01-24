@@ -25,4 +25,9 @@ public class ArticleRepository : IArticleRepository
         await _context.Articles.AddRangeAsync(articles);
         return await _context.SaveChangesAsync();
     }
+
+    public async Task<Article?> GetLast()
+    {
+        return await _context.Articles.LastAsync();
+    }
 }
