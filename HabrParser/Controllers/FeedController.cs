@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HabrParser.Contracts;
+using HabrParser.Models;
 using HabrParser.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,12 @@ namespace HabrParser.Controllers
     {
         private readonly IArticlesService _articlesService;
         private readonly ILogger _logger;
-        private readonly FeedService _feedService;
+        private readonly IFeedService _feedService;
         private readonly IArticleRepository _articleRepository;
 
         public FeedController(IArticlesService articlesService,
             ILogger<FeedController> logger,
-            FeedService feedService,
+            IFeedService feedService,
             IArticleRepository articleRepository)
         {
             _articlesService = articlesService;
@@ -32,7 +33,8 @@ namespace HabrParser.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllArticles()
         {
-            return Ok();
+            var articles = await _articleRepository.GetAllArticlesAsync();
+            return Ok(articles);
         }
 
         [HttpPost]
