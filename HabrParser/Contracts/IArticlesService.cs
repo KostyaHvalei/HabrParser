@@ -4,5 +4,5 @@ namespace HabrParser.Contracts;
 
 public interface IArticlesService
 {
-    public Task<List<Article>> ParsePage(int pageNumber);
+    public Task<List<Article>> ParseRSSPage(string rssContent);
 }
