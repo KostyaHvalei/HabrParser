@@ -20,13 +20,13 @@ public class ArticleRepository : IArticleRepository
             .AsNoTracking()
             .ToListAsync();
 
-    public async Task<int> AddArticles(List<Article> articles)
+    public async Task<int> AddArticlesAsync(List<Article> articles)
     {
         await _context.Articles.AddRangeAsync(articles);
         return await _context.SaveChangesAsync();
     }
 
-    public async Task<Article?> GetLast()
+    public async Task<Article?> GetLastAsync()
     {
         return await _context.Articles.LastAsync();
     }

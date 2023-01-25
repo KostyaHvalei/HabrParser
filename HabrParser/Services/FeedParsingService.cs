@@ -12,7 +12,7 @@ public class FeedParsingService : IFeedParsingService
     {
     }
 
-    public async Task<List<Article>> ParseRSSPage(string rssContent)
+    public async Task<List<Article>> ParseRSSPageAsync(string rssContent)
     {
         XDocument xDocumnet = XDocument.Parse(rssContent);
         var items = xDocumnet.Root.Descendants()

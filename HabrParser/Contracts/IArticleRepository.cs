@@ -5,6 +5,6 @@ namespace HabrParser.Contracts;
 public interface IArticleRepository
 {
     public Task<IEnumerable<Article>> GetAllArticlesAsync();
-    public Task<int> AddArticles(List<Article> articles);
-    public Task<Article?> GetLast();
+    public Task<int> AddArticlesAsync(List<Article> articles);
+    public Task<Article?> GetLastAsync();
 }
