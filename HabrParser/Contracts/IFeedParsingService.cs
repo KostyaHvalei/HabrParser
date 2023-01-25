@@ -2,7 +2,7 @@
 
 namespace HabrParser.Contracts;
 
-public interface IArticlesService
+public interface IFeedParsingService
 {
     public Task<List<Article>> ParseRSSPage(string rssContent);
 }

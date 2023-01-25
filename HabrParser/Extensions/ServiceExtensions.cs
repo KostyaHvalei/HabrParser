@@ -22,9 +22,9 @@ public static class ServiceExtensions
             b.MigrationsAssembly("HabrParser")));
     }
     
-    public static void AddArticlesService(this IServiceCollection services)
+    public static void AddFeedParsingService(this IServiceCollection services)
     {
-        services.AddSingleton<IArticlesService, ArticlesService>();
+        services.AddSingleton<IFeedParsingService, FeedParsingService>();
     }
 
     public static void AddRepositories(this IServiceCollection services)

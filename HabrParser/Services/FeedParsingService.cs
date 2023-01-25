@@ -6,9 +6,9 @@ using HabrParser.Models;
 
 namespace HabrParser.Services;
 
-public class ArticlesService : IArticlesService
+public class FeedParsingService : IFeedParsingService
 {
-    public ArticlesService()
+    public FeedParsingService()
     {
     }
 
