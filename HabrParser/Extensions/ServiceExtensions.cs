@@ -31,6 +31,7 @@ public static class ServiceExtensions
     public static void AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<IArticleRepository, ArticleRepository>();
+        services.AddScoped<IHistoryRepository, HistoryRepository>();
     }
 
     public static void AddArticlesService(this IServiceCollection services)
