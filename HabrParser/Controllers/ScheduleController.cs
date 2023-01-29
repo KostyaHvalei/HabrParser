@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HabrParser.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Hangfire;
 
 namespace HabrParser.Controllers
 {
@@ -17,6 +18,20 @@ namespace HabrParser.Controllers
         public ScheduleController(IArticlesService articlesService)
         {
             _articlesService = articlesService;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateOrUpdateSchedule()
+        {
+            RecurringJob.AddOrUpdate("parser", () =>  LoadNewArticles(), Cron.Daily());
+            return Ok();
+        }
+
+        //Synchronous decorator for LoadNewArticlesAsync from ArticlesService
+        private void LoadNewArticles()
+        {
+            var task = _articlesService.LoadNewArticlesAsync();
+            task.Wait();
         }
     }
 }
