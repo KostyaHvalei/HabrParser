@@ -28,6 +28,6 @@ public class ArticleRepository : IArticleRepository
 
     public async Task<Article?> GetLastAsync()
     {
-        return await _context.Articles.LastAsync();
+        return await _context.Articles.OrderBy(a => a.PublishedAt).LastOrDefaultAsync();
     }
 }
