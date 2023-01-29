@@ -8,6 +8,7 @@ using HabrParser.Models.DTOs;
 using HabrParser.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using IHistoryRepository = HabrParser.Contracts.IHistoryRepository;
 
 namespace HabrParser.Controllers
 {
@@ -20,18 +21,21 @@ namespace HabrParser.Controllers
         private readonly IFeedService _feedService;
         private readonly IArticleRepository _articleRepository;
         private readonly IArticlesService _articlesService;
+        private readonly IHistoryRepository _historyRepository;
 
         public FeedController(IFeedParsingService feedParsingService,
             ILogger<FeedController> logger,
             IFeedService feedService,
             IArticleRepository articleRepository,
-            IArticlesService articlesService)
+            IArticlesService articlesService,
+            IHistoryRepository historyRepository)
         {
             _feedParsingService = feedParsingService;
             _logger = logger;
             _feedService = feedService;
             _articleRepository = articleRepository;
             _articlesService = articlesService;
+            _historyRepository = historyRepository;
         }
 
         [HttpGet]
@@ -45,7 +49,6 @@ namespace HabrParser.Controllers
         public async Task<IActionResult> LoadNewArticles()
         {
             int countLoaded = await _articlesService.LoadNewArticlesAsync();
-            //TODO: updateInfo to history
             return Ok(new LoadNewArticlesResultDTO{CountAdded = countLoaded});
         }
     }

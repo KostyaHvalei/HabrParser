@@ -14,7 +14,7 @@ public class HistoryRepository : IHistoryRepository
         _context = context;
     }
     
-    public async Task<IEnumerable<LoadInfo>> GetFullHistory()
+    public async Task<IEnumerable<LoadInfo>> GetFullHistoryAsync()
     {
         return await _context.History
             .OrderByDescending(loadInfo => loadInfo.LoadedAt)
@@ -22,7 +22,7 @@ public class HistoryRepository : IHistoryRepository
             .ToListAsync();
     }
 
-    public async Task Add(LoadInfo loadInfo)
+    public async Task AddAsync(LoadInfo loadInfo)
     {
         await _context.History.AddAsync(loadInfo);
         await _context.SaveChangesAsync();
