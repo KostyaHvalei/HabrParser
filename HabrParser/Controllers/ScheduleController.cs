@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HabrParser.Contracts;
+using HabrParser.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Hangfire;
@@ -21,9 +22,9 @@ namespace HabrParser.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrUpdateSchedule()
+        public async Task<IActionResult> CreateOrUpdateSchedule([FromBody] ScheduleDTO scheduleDto)
         {
-            RecurringJob.AddOrUpdate("parser", () =>  LoadNewArticles(), Cron.Daily());
+            RecurringJob.AddOrUpdate("parser", () =>  LoadNewArticles(), scheduleDto.CronSchedule);
             return Ok();
         }
 
