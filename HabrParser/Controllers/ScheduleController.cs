@@ -7,6 +7,7 @@ using HabrParser.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Hangfire;
+using Hangfire.Storage;
 
 namespace HabrParser.Controllers
 {
@@ -21,6 +22,20 @@ namespace HabrParser.Controllers
             _articlesService = articlesService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetCurrentSchedule()
+        {
+            var recurringJob = JobStorage.
+                Current.
+                GetConnection().
+                GetRecurringJobs().
+                Find(x => x.Id == "parser");
+
+            return recurringJob != null 
+                ? Ok(new ScheduleDTO{CronSchedule = recurringJob.Cron}) 
+                : Ok("There is not schedule");
+        }
+        
         [HttpPost]
         public async Task<IActionResult> CreateOrUpdateSchedule([FromBody] ScheduleDTO scheduleDto)
         {
