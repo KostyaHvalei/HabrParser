@@ -49,6 +49,12 @@ namespace HabrParser.Controllers
         public async Task<IActionResult> LoadNewArticles()
         {
             int countLoaded = await _articlesService.LoadNewArticlesAsync();
+            await _historyRepository.AddAsync(new LoadInfo
+            {
+                CountLoaded = countLoaded,
+                LoadedAt = DateTime.Now,
+                LoadedAutomatically = false
+            });
             return Ok(new LoadNewArticlesResultDTO{CountAdded = countLoaded});
         }
     }
