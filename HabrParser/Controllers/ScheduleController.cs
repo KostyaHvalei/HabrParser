@@ -24,7 +24,13 @@ namespace HabrParser.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrUpdateSchedule([FromBody] ScheduleDTO scheduleDto)
         {
-            RecurringJob.AddOrUpdate("parser", () =>  LoadNewArticles(), scheduleDto.CronSchedule);
+            RecurringJob.AddOrUpdate("parser",
+                () =>  LoadNewArticles(),
+                scheduleDto.CronSchedule,
+                new RecurringJobOptions
+                {
+                    TimeZone = TimeZoneInfo.Local
+                });
             return Ok();
         }
 
