@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HabrParser.Contracts;
 using HabrParser.Models;
+using HabrParser.Models.DTOs;
 using HabrParser.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,16 +19,19 @@ namespace HabrParser.Controllers
         private readonly ILogger _logger;
         private readonly IFeedService _feedService;
         private readonly IArticleRepository _articleRepository;
+        private readonly IArticlesService _articlesService;
 
         public FeedController(IFeedParsingService feedParsingService,
             ILogger<FeedController> logger,
             IFeedService feedService,
-            IArticleRepository articleRepository)
+            IArticleRepository articleRepository,
+            IArticlesService articlesService)
         {
             _feedParsingService = feedParsingService;
             _logger = logger;
             _feedService = feedService;
             _articleRepository = articleRepository;
+            _articlesService = articlesService;
         }
 
         [HttpGet]
@@ -40,8 +44,8 @@ namespace HabrParser.Controllers
         [HttpPost]
         public async Task<IActionResult> LoadNewArticles()
         {
-            
-            return Ok();
+            int countLoaded = await _articlesService.LoadNewArticlesAsync();
+            return Ok(new LoadNewArticlesResultDTO{CountAdded = countLoaded});
         }
     }
 }
