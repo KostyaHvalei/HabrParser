@@ -39,6 +39,7 @@ namespace HabrParser.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrUpdateSchedule([FromBody] ScheduleDTO scheduleDto)
         {
+            //TODO: add null check for scheduleDTO
             RecurringJob.AddOrUpdate("parser",
                 () =>  LoadNewArticles(),
                 scheduleDto.CronSchedule,
@@ -46,12 +47,15 @@ namespace HabrParser.Controllers
                 {
                     TimeZone = TimeZoneInfo.Local
                 });
+            
+            //TODO: change result type to CreatedAtRoute. (GetCurrentSchedule action)
             return Ok();
         }
 
         //Synchronous decorator for LoadNewArticlesAsync from ArticlesService
         private void LoadNewArticles()
         {
+            //TODO: updateInfo to history
             var task = _articlesService.LoadNewArticlesAsync();
             task.Wait();
         }

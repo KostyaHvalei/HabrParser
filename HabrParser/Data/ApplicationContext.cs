@@ -12,4 +12,5 @@ public class ApplicationContext : DbContext
     }
     
     public DbSet<Article> Articles { get; set; }
+    public DbSet<LoadInfo> History { get; set; }
 }
