@@ -35,7 +35,7 @@ namespace HabrParser.Controllers
                 ? Ok(new ScheduleDTO{CronSchedule = recurringJob.Cron}) 
                 : Ok("There is not schedule");
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> CreateOrUpdateSchedule([FromBody] ScheduleDTO scheduleDto)
         {
@@ -54,6 +54,13 @@ namespace HabrParser.Controllers
         {
             var task = _articlesService.LoadNewArticlesAsync();
             task.Wait();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveSchedule()
+        {
+            RecurringJob.RemoveIfExists("parser");
+            return Ok();
         }
     }
 }
