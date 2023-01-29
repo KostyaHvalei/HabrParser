@@ -33,7 +33,9 @@ public class ArticlesService : IArticlesService
             var pageContent = await _feedService.LoadPageAsync(pageNumber);
             var pageArticles = await _feedParsingService.ParseRSSPageAsync(pageContent);
 
-            int lastArticleIdx = pageArticles.IndexOf(lastArticle);
+            int lastArticleIdx = (lastArticle != null 
+                ? pageArticles.FindIndex(article => article.Id == lastArticle.Id)
+                : -1);
             
             if(lastArticleIdx == -1)
                 newArticles.AddRange(pageArticles);
