@@ -2,6 +2,7 @@
 using HabrParser.Data;
 using HabrParser.Repository;
 using HabrParser.Services;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 
 namespace HabrParser.Extensions;
@@ -35,5 +36,13 @@ public static class ServiceExtensions
     public static void AddArticlesService(this IServiceCollection services)
     {
         services.AddScoped<IArticlesService, ArticlesService>();
+    }
+
+    public static void ConfigureHangfire(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddHangfire(conf => conf
+            .UseRecommendedSerializerSettings()
+            .UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection")));
+        services.AddHangfireServer();
     }
 }

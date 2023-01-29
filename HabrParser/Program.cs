@@ -2,6 +2,7 @@ using HabrParser.Contracts;
 using HabrParser.Data;
 using HabrParser.Extensions;
 using HabrParser.Services;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddFeedHttpClient(builder.Configuration);
 builder.Services.AddFeedParsingService();
 builder.Services.AddArticlesService();
 builder.Services.AddRepositories();
+builder.Services.ConfigureHangfire(builder.Configuration);
 
 builder.Services.ConfigureApplicationContext(builder.Configuration);
 
@@ -28,6 +30,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseHangfireDashboard();
+app.MapHangfireDashboard();
 
 app.UseAuthorization();
 
