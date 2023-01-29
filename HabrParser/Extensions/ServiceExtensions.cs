@@ -31,4 +31,9 @@ public static class ServiceExtensions
     {
         services.AddScoped<IArticleRepository, ArticleRepository>();
     }
+
+    public static void AddArticlesService(this IServiceCollection services)
+    {
+        services.AddScoped<IArticlesService, ArticlesService>();
+    }
 }
