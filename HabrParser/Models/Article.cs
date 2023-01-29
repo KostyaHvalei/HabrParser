@@ -4,7 +4,7 @@ namespace HabrParser.Models;
 
 public class Article
 {
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
     
     public string Creator { get; set; }
