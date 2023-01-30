@@ -18,12 +18,15 @@ namespace HabrParser.Controllers
     {
         private readonly IArticlesService _articlesService;
         private readonly IHistoryRepository _historyRepository;
+        private readonly ILogger<ScheduleController> _logger;
 
         public ScheduleController(IArticlesService articlesService,
-            IHistoryRepository historyRepository)
+            IHistoryRepository historyRepository,
+            ILogger<ScheduleController> logger)
         {
             _articlesService = articlesService;
             _historyRepository = historyRepository;
+            _logger = logger;
         }
 
         [HttpGet(Name = "GetCurrentSchedule")]
@@ -45,6 +48,7 @@ namespace HabrParser.Controllers
         {
             if (!ModelState.IsValid)
             {
+                _logger.LogError($"Models state is not valid");
                 return UnprocessableEntity(ModelState);
             }
             
@@ -56,6 +60,7 @@ namespace HabrParser.Controllers
                     TimeZone = TimeZoneInfo.Local
                 });
             
+            _logger.LogInformation($"New schedule: {scheduleDto.CronSchedule}");
             return CreatedAtRoute("GetCurrentSchedule",
                 new ScheduleDTO{CronSchedule = scheduleDto.CronSchedule});
         }
@@ -81,6 +86,7 @@ namespace HabrParser.Controllers
         public async Task<IActionResult> RemoveSchedule()
         {
             RecurringJob.RemoveIfExists("parser");
+            _logger.LogInformation($"Schedule was removed");
             return Ok();
         }
     }
