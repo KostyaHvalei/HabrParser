@@ -37,7 +37,7 @@ namespace HabrParser.Controllers
 
             return recurringJob != null 
                 ? Ok(new ScheduleDTO{CronSchedule = recurringJob.Cron}) 
-                : Ok("There is not schedule");
+                : Ok("There is no schedule");
         }
 
         [HttpPost]
