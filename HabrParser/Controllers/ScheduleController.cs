@@ -26,7 +26,7 @@ namespace HabrParser.Controllers
             _historyRepository = historyRepository;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetCurrentSchedule")]
         public async Task<IActionResult> GetCurrentSchedule()
         {
             var recurringJob = JobStorage.
@@ -52,12 +52,13 @@ namespace HabrParser.Controllers
                     TimeZone = TimeZoneInfo.Local
                 });
             
-            //TODO: change result type to CreatedAtRoute. (GetCurrentSchedule action)
-            return Ok();
+            return CreatedAtRoute("GetCurrentSchedule",
+                new ScheduleDTO{CronSchedule = scheduleDto.CronSchedule});
         }
 
         //Synchronous decorator for LoadNewArticlesAsync from ArticlesService
-        private void LoadNewArticles()
+        [NonAction]
+        public void LoadNewArticles()
         {
             var loadingTask = _articlesService.LoadNewArticlesAsync();
             loadingTask.Wait();
