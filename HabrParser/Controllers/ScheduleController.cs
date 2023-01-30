@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HabrParser.Contracts;
+using HabrParser.Models;
 using HabrParser.Models.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,13 @@ namespace HabrParser.Controllers
     public class ScheduleController : ControllerBase
     {
         private readonly IArticlesService _articlesService;
+        private readonly IHistoryRepository _historyRepository;
 
-        public ScheduleController(IArticlesService articlesService)
+        public ScheduleController(IArticlesService articlesService,
+            IHistoryRepository historyRepository)
         {
             _articlesService = articlesService;
+            _historyRepository = historyRepository;
         }
 
         [HttpGet]
@@ -55,9 +59,17 @@ namespace HabrParser.Controllers
         //Synchronous decorator for LoadNewArticlesAsync from ArticlesService
         private void LoadNewArticles()
         {
-            //TODO: updateInfo to history
-            var task = _articlesService.LoadNewArticlesAsync();
-            task.Wait();
+            var loadingTask = _articlesService.LoadNewArticlesAsync();
+            loadingTask.Wait();
+            int countLoaded = loadingTask.Result;
+            
+            var historyTask = _historyRepository.AddAsync(new LoadInfo
+            {
+                CountLoaded = countLoaded,
+                LoadedAt = DateTime.Now,
+                LoadedAutomatically = true
+            });
+            historyTask.Wait();
         }
 
         [HttpDelete]
