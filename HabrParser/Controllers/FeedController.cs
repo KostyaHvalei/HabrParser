@@ -55,6 +55,8 @@ namespace HabrParser.Controllers
                 LoadedAt = DateTime.Now,
                 LoadedAutomatically = false
             });
+            
+            _logger.LogInformation($"Loaded {countLoaded} Articles");
             return Ok(new LoadNewArticlesResultDTO{CountAdded = countLoaded});
         }
     }
