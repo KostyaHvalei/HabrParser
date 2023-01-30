@@ -16,23 +16,17 @@ namespace HabrParser.Controllers
     [ApiController]
     public class FeedController : ControllerBase
     {
-        private readonly IFeedParsingService _feedParsingService;
         private readonly ILogger _logger;
-        private readonly IFeedService _feedService;
         private readonly IArticleRepository _articleRepository;
         private readonly IArticlesService _articlesService;
         private readonly IHistoryRepository _historyRepository;
 
-        public FeedController(IFeedParsingService feedParsingService,
-            ILogger<FeedController> logger,
-            IFeedService feedService,
+        public FeedController(ILogger<FeedController> logger,
             IArticleRepository articleRepository,
             IArticlesService articlesService,
             IHistoryRepository historyRepository)
         {
-            _feedParsingService = feedParsingService;
             _logger = logger;
-            _feedService = feedService;
             _articleRepository = articleRepository;
             _articlesService = articlesService;
             _historyRepository = historyRepository;
