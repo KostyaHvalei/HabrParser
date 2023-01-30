@@ -43,7 +43,11 @@ namespace HabrParser.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrUpdateSchedule([FromBody] ScheduleDTO scheduleDto)
         {
-            //TODO: add null check for scheduleDTO
+            if (!ModelState.IsValid)
+            {
+                return UnprocessableEntity(ModelState);
+            }
+            
             RecurringJob.AddOrUpdate("parser",
                 () =>  LoadNewArticles(),
                 scheduleDto.CronSchedule,
