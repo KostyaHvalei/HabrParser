@@ -31,6 +31,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.ConfigureExceptionHandler();
+
 app.UseHangfireDashboard();
 app.MapHangfireDashboard();
 
