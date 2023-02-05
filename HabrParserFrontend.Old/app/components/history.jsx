@@ -10,7 +10,7 @@ export default class History extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://localhost:44339/api/history")
+        fetch("https://localhost:44373/api/history")
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ history: data, isLoaded: true });

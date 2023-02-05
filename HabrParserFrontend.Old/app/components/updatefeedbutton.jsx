@@ -14,7 +14,7 @@ export default class UpdateFeedButton extends React.Component {
 
     updateFeed() {
         this.setState({ isLoading: true });
-        fetch("https://localhost:44339/api/feed", {
+        fetch("https://localhost:44373/api/feed", {
             method: "POST",
         })
             .then((response) => response.text())

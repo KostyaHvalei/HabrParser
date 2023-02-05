@@ -17,7 +17,7 @@ export default class ScheduleForm extends React.Component {
 
     async send() {
         let cronschedule = { cronschedule: this.state.schedule };
-        const response = await fetch("https://localhost:44339/api/schedule", {
+        const response = await fetch("https://localhost:44373/api/schedule", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

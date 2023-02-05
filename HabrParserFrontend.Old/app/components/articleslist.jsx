@@ -11,7 +11,7 @@ export default class ArticlesList extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://localhost:44339/api/feed")
+        fetch("https://localhost:44373/api/feed")
             .then((response) => response.json())
             .then((data) => {
                 this.setState({ articles: data, isLoaded: true });

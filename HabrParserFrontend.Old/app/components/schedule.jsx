@@ -17,7 +17,7 @@ export default class Schedule extends React.Component {
     }
 
     async getSchedule() {
-        await fetch("https://localhost:44339/api/schedule")
+        await fetch("https://localhost:44373/api/schedule")
             .then((response) => response.text())
             .then((data) => {
                 this.setState({ schedule: data, isLoaded: true });

@@ -10,7 +10,7 @@ export default class ClearScheduleButton extends React.Component {
 
     async send() {
         this.setState({ isDeleting: true });
-        await fetch("https://localhost:44339/api/schedule", {
+        await fetch("https://localhost:44373/api/schedule", {
             method: "DELETE",
         }).then((resp) => {
             console.log(resp.status);
