@@ -24,8 +24,8 @@ export default class ArticlesList extends React.Component {
                     id={item.id}
                     title={item.title}
                     creator={item.creator}
-                    previewText={item.previewText}
-                    publicationDate={item.publicationDate}
+                    content={item.content}
+                    publishedAt={item.publishedAt}
                     link={item.link}
                     imageLink={item.imageLink}
                 />

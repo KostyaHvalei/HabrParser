@@ -11,8 +11,8 @@ export default class Article extends React.Component{
             <div className="card-body">
                 <h5 className="card-title">Title: {this.props.title}</h5>
                 <p className="card-text">Author: {this.props.creator}</p>
-                <p className="card-text">Text: {this.props.previewText}</p>
-                <p className="card-text">Date of creation: {this.props.publicationDate}</p>
+                <p className="card-text">Content: {this.props.content}</p>
+                <p className="card-text">Date of creation: {this.props.publishedAt}</p>
                 <a className="btn btn-primary" target="_blank" href={this.props.link}>
                     Go to Habr.com
                 </a>
