@@ -21,9 +21,9 @@ export default class History extends React.Component {
         const history = this.state.history.map((item, i) => (
             <li>
                 <div key={item.id}>
-                    <p>CountAdded: {item.countAdded}</p>
-                    <p>Added at: {item.addedAt}</p>
-                    <p>Automaticly: {item.automaticly.toString()}</p>
+                    <p>CountAdded: {item.countLoaded}</p>
+                    <p>Added at: {item.loadedAt}</p>
+                    <p>Automaticly: {item.loadedAutomatically.toString()}</p>
                 </div>
             </li>
         ));
