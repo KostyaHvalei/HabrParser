@@ -46,4 +46,13 @@ public static class ServiceExtensions
             .UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection")));
         services.AddHangfireServer();
     }
+    
+    public static void ConfigureCors(this IServiceCollection services) =>
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", builder =>
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+        });
 }

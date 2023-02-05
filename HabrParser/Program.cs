@@ -12,6 +12,7 @@ builder.Services.AddFeedParsingService();
 builder.Services.AddArticlesService();
 builder.Services.AddRepositories();
 builder.Services.ConfigureHangfire(builder.Configuration);
+builder.Services.ConfigureCors();
 
 builder.Services.ConfigureApplicationContext(builder.Configuration);
 
@@ -30,6 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 
 app.ConfigureExceptionHandler();
 
