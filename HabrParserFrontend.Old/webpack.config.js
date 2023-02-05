@@ -3,10 +3,10 @@
 module.exports = {
     mode: "development",
     entry: "./app/app.jsx",
-    output: {
+    output:{
         path: path.resolve(__dirname, "./public"),
         publicPath: "/public/",
-        filename: "bundle.js",
+        filename: "bundle.js"
     },
     devServer: {
         historyApiFallback: true,
@@ -14,18 +14,18 @@ module.exports = {
             directory: path.join(__dirname, "/"),
         },
         port: 8081,
-        open: true,
+        open: true
     },
-    module: {
-        rules: [
+    module:{
+        rules:[ 
             {
-                test: /\.jsx?$/,
-                exclude: /(node_modules)/,
-                loader: "babel-loader",
-                options: {
-                    presets: ["@babel/preset-react"],
-                },
-            },
-        ],
-    },
-};
+                test: /\.jsx?$/, 
+                exclude: /(node_modules)/, 
+                loader: "babel-loader", 
+                options:{
+                    presets:[ "@babel/preset-react"] 
+                }
+            }
+        ]
+    }
+}
