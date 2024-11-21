@@ -1,9 +1,23 @@
+using HabrParser.Contracts;
+using HabrParser.Data;
+using HabrParser.Extensions;
+using HabrParser.Services;
+using Hangfire;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddFeedHttpClient(builder.Configuration);
+builder.Services.AddFeedParsingService();
+builder.Services.AddArticlesService();
+builder.Services.AddRepositories();
+builder.Services.ConfigureHangfire(builder.Configuration);
+builder.Services.ConfigureCors();
+
+builder.Services.ConfigureApplicationContext(builder.Configuration);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,6 +31,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
+
+app.ConfigureExceptionHandler();
+
+app.UseHangfireDashboard();
+app.MapHangfireDashboard();
 
 app.UseAuthorization();
 
