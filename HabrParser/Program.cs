@@ -1,7 +1,4 @@
-using HabrParser.Contracts;
-using HabrParser.Data;
 using HabrParser.Extensions;
-using HabrParser.Services;
 using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
